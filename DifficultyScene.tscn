@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=3 uid="uid://djb51tlac2ve2"]
+
+[ext_resource type="Script" path="res://DifficultyScene.gd" id="1_0qrl8"]
+
+[node name="DifficultyScene" type="Node2D"]
+script = ExtResource("1_0qrl8")
+
+[node name="DifficultyHeightTextEdit" type="TextEdit" parent="."]
+offset_left = 465.0
+offset_top = 99.0
+offset_right = 825.0
+offset_bottom = 165.0
+theme_override_font_sizes/font_size = 40
+placeholder_text = "范围：（8~20）"
+
+[node name="DifficultyHeightLabel" type="Label" parent="."]
+offset_left = 252.0
+offset_top = 101.0
+offset_right = 452.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 40
+text = "场景宽度："
+
+[node name="DifficultyWidthTextEdit" type="TextEdit" parent="."]
+offset_left = 465.0
+offset_top = 195.0
+offset_right = 826.0
+offset_bottom = 264.0
+theme_override_font_sizes/font_size = 40
+placeholder_text = "范围：（8~20）"
+
+[node name="DifficultyWidthLabel" type="Label" parent="."]
+offset_left = 249.0
+offset_top = 203.0
+offset_right = 449.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 40
+text = "场景高度："
+
+[node name="DifficultyMineTextEdit" type="TextEdit" parent="."]
+offset_left = 465.0
+offset_top = 291.0
+offset_right = 884.0
+offset_bottom = 365.0
+theme_override_font_sizes/font_size = 40
+placeholder_text = "范围：（10~w*h-32）"
+
+[node name="DifficultyMineLabel" type="Label" parent="."]
+offset_left = 250.0
+offset_top = 302.0
+offset_right = 450.0
+offset_bottom = 357.0
+theme_override_font_sizes/font_size = 40
+text = "场景雷数："
+
+[node name="DifficultySecondLabel" type="Label" parent="."]
+offset_left = 249.0
+offset_top = 403.0
+offset_right = 449.0
+offset_bottom = 468.0
+theme_override_font_sizes/font_size = 40
+text = "最大秒数："
+
+[node name="DifficultySecondTextEdit" type="TextEdit" parent="."]
+offset_left = 464.0
+offset_top = 393.0
+offset_right = 820.0
+offset_bottom = 468.0
+theme_override_font_sizes/font_size = 40
+placeholder_text = "范围：（60~600）"
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 260.0
+offset_top = 680.0
+offset_right = 495.0
+offset_bottom = 749.0
+theme_override_font_sizes/font_size = 40
+text = "开始游戏"
+
+[node name="ReturnButton" type="Button" parent="."]
+offset_left = 624.0
+offset_top = 679.0
+offset_right = 884.0
+offset_bottom = 750.0
+theme_override_font_sizes/font_size = 40
+text = "返回主菜单"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

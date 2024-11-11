@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpvyy3eh317ub"]
+
+[ext_resource type="Script" path="res://HelpScene.gd" id="1_6bqsp"]
+
+[sub_resource type="SystemFont" id="SystemFont_s47ai"]
+font_names = PackedStringArray("Microsoft JhengHei")
+font_weight = 700
+
+[sub_resource type="SystemFont" id="SystemFont_wb7bu"]
+font_names = PackedStringArray("SimSun")
+font_weight = 700
+
+[node name="HelpScene" type="Node2D"]
+script = ExtResource("1_6bqsp")
+
+[node name="HelpTitle" type="Label" parent="."]
+offset_left = 402.0
+offset_top = -4.0
+offset_right = 816.0
+offset_bottom = 130.0
+theme_override_fonts/font = SubResource("SystemFont_s47ai")
+theme_override_font_sizes/font_size = 100
+text = "帮助文档"
+
+[node name="HelpContent" type="Label" parent="."]
+offset_left = 101.0
+offset_top = 137.0
+offset_right = 1145.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 40
+text = "扫雷基本规则：
+扫出空白则代表该处周围8格均没有雷。
+扫出数字则代表周围8格之中有多少格雷。
+踩中了雷则失败~超时也失败。时间默认值5分钟（300秒）
+刚开局的时候，会有场景长度、宽度、雷数的选择~
+宽度默认值：8，高度默认值：8，雷数默认值：10
+如果雷数不在（10~长度*宽度-32）区间，
+则默认会按照输入的最大最小设置成这个值~"
+
+[node name="HelpReturn" type="Button" parent="."]
+offset_left = 442.0
+offset_top = 639.0
+offset_right = 814.0
+offset_bottom = 779.0
+theme_override_fonts/font = SubResource("SystemFont_wb7bu")
+theme_override_font_sizes/font_size = 60
+text = "返回主菜单"
+
+[connection signal="pressed" from="HelpReturn" to="." method="_on_help_return_pressed"]

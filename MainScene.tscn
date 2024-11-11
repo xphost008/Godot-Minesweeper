@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dju2k4ng3q4ex"]
+
+[ext_resource type="Script" path="res://MainScene.gd" id="1_vegdb"]
+
+[sub_resource type="SystemFont" id="SystemFont_apond"]
+font_names = PackedStringArray("KaiTi")
+font_weight = 700
+
+[sub_resource type="SystemFont" id="SystemFont_ycfwn"]
+font_names = PackedStringArray("SimSun")
+font_weight = 700
+
+[sub_resource type="SystemFont" id="SystemFont_rpody"]
+font_names = PackedStringArray("SimSun")
+font_weight = 700
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_vegdb")
+
+[node name="MainTitle" type="Label" parent="."]
+offset_left = 286.0
+offset_top = 46.0
+offset_right = 926.0
+offset_bottom = 207.0
+theme_override_fonts/font = SubResource("SystemFont_apond")
+theme_override_font_sizes/font_size = 160
+text = "扫雷游戏"
+
+[node name="ButtonStart" type="Button" parent="."]
+offset_left = 457.0
+offset_top = 472.0
+offset_right = 820.0
+offset_bottom = 590.0
+theme_override_fonts/font = SubResource("SystemFont_ycfwn")
+theme_override_font_sizes/font_size = 60
+text = "开始游戏"
+
+[node name="ButtonHelp" type="Button" parent="."]
+offset_left = 457.0
+offset_top = 616.0
+offset_right = 817.0
+offset_bottom = 729.0
+theme_override_fonts/font = SubResource("SystemFont_rpody")
+theme_override_font_sizes/font_size = 60
+text = "帮助"
+
+[connection signal="pressed" from="ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="ButtonHelp" to="." method="_on_button_help_pressed"]
