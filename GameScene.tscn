@@ -5,7 +5,7 @@
 [sub_resource type="SystemFont" id="SystemFont_y8avb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfjui"]
-bg_color = Color(0.0181242, 0.133992, 0.146381, 1)
+bg_color = Color(0.70559, 0.70559, 0.705589, 1)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_dj1jk")
@@ -19,27 +19,27 @@ theme_override_font_sizes/font_size = 40
 text = "返回主菜单"
 
 [node name="LabelScore" type="Label" parent="."]
-offset_left = 39.0
-offset_top = 219.0
-offset_right = 234.0
-offset_bottom = 274.0
+offset_left = 22.0
+offset_top = 188.0
+offset_right = 217.0
+offset_bottom = 243.0
 theme_override_fonts/font = SubResource("SystemFont_y8avb")
 theme_override_font_sizes/font_size = 40
 text = "分数：0"
 
 [node name="LabelSecond" type="Label" parent="."]
-offset_left = 40.0
-offset_top = 355.0
-offset_right = 241.0
-offset_bottom = 397.0
-theme_override_font_sizes/font_size = 30
+offset_left = 26.0
+offset_top = 264.0
+offset_right = 294.0
+offset_bottom = 319.0
+theme_override_font_sizes/font_size = 40
 text = "剩余秒数：300"
 
 [node name="LabelWin" type="Label" parent="."]
-offset_left = 47.0
-offset_top = 608.0
-offset_right = 347.0
-offset_bottom = 745.0
+offset_left = 20.0
+offset_top = 612.0
+offset_right = 378.0
+offset_bottom = 749.0
 theme_override_font_sizes/font_size = 100
 
 [node name="MineScenePanel" type="Panel" parent="."]
@@ -47,5 +47,13 @@ offset_left = 400.0
 offset_right = 1200.0
 offset_bottom = 800.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cfjui")
+
+[node name="LabelFlag" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 349.0
+offset_right = 287.0
+offset_bottom = 404.0
+theme_override_font_sizes/font_size = 40
+text = "剩余旗子：0"
 
 [connection signal="pressed" from="ButtonReturn" to="." method="_on_button_return_pressed"]

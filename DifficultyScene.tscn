@@ -9,7 +9,7 @@ script = ExtResource("1_0qrl8")
 offset_left = 465.0
 offset_top = 99.0
 offset_right = 825.0
-offset_bottom = 165.0
+offset_bottom = 168.0
 theme_override_font_sizes/font_size = 40
 placeholder_text = "范围：（8~20）"
 
@@ -19,7 +19,7 @@ offset_top = 101.0
 offset_right = 452.0
 offset_bottom = 163.0
 theme_override_font_sizes/font_size = 40
-text = "场景宽度："
+text = "场景高度："
 
 [node name="DifficultyWidthTextEdit" type="TextEdit" parent="."]
 offset_left = 465.0
@@ -35,7 +35,7 @@ offset_top = 203.0
 offset_right = 449.0
 offset_bottom = 260.0
 theme_override_font_sizes/font_size = 40
-text = "场景高度："
+text = "场景宽度："
 
 [node name="DifficultyMineTextEdit" type="TextEdit" parent="."]
 offset_left = 465.0
