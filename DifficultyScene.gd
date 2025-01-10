@@ -33,3 +33,22 @@ func _on_start_button_pressed() -> void:
 	if str(second) == second_str and second >= 60 and second <= 600:
 		Global.second = second
 	get_tree().change_scene_to_file("res://GameScene.tscn")
+
+
+func _on_easy_button_button_down() -> void:
+	$DifficultyHeightTextEdit.text = str(9)
+	$DifficultyWidthTextEdit.text = str(9)
+	$DifficultyMineTextEdit.text = str(10)
+	$DifficultySecondTextEdit.text = str(60)
+
+func _on_normal_button_button_down() -> void:
+	$DifficultyHeightTextEdit.text = str(14)
+	$DifficultyWidthTextEdit.text = str(14)
+	$DifficultyMineTextEdit.text = str(40)
+	$DifficultySecondTextEdit.text = str(240)
+
+func _on_hard_button_button_down() -> void:
+	$DifficultyHeightTextEdit.text = str(20)
+	$DifficultyWidthTextEdit.text = str(20)
+	$DifficultyMineTextEdit.text = str(80)
+	$DifficultySecondTextEdit.text = str(600)

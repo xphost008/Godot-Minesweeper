@@ -9,6 +9,7 @@ var time
 var is_lock = false
 var mine = 0
 var flag = 0
+var is_start = false
 
 func _ready() -> void:
 	chess = initialize_2d_array(Global.height, Global.width, 0)
@@ -19,22 +20,19 @@ func _ready() -> void:
 	flag = Global.mine
 	$LabelSecond.text = "剩余秒数：" + str(time)
 	$LabelFlag.text = "剩余旗子：" + str(flag)
-	# 埋雷
-	for i in range(Global.mine):
-		_rand_mine()
-	# 将chess赋值
-	_reload_array()
-	# 布置场景+蒙布
+	# 蒙布+为文字和按钮赋初始框框
 	_reload_scene()
 
 var time_accumulator = 0.0
 func _process(delta: float) -> void:
-	# 时间自增delta
-	time_accumulator += delta
-	# 如果自增时间超过了自定义时间，则执行一次execute_task。然后将自增时间重设为0
-	if time_accumulator >= 1:
-		_execute_task()
-		time_accumulator = 0.0
+	# 判断是否点击场上任意按钮（此时是否开始）
+	if is_start:
+		# 时间自增delta
+		time_accumulator += delta
+		# 如果自增时间超过了自定义时间，则执行一次execute_task。然后将自增时间重设为0
+		if time_accumulator >= 1:
+			_execute_task()
+			time_accumulator = 0.0
 
 # 执行一次时间减少
 func _execute_task():
@@ -46,14 +44,17 @@ func _execute_task():
 			time -= 1
 			$LabelSecond.text = "剩余秒数：" + str(time)
 	
-# 随机生成一个雷
-func _rand_mine():
-	while true:
-		var i = randi() % Global.height
-		var j = randi() % Global.width
-		if(chess[i][j] == 0):
-			chess[i][j] = -1
-			break
+# 随机生成所有雷
+func _rand_mine(m: int, n: int):
+	for o in range(Global.mine):
+		while true:
+			var i = randi() % Global.height
+			var j = randi() % Global.width
+			if(m == i && j == n):
+				continue
+			if(chess[i][j] == 0):
+				chess[i][j] = -1
+				break
 	
 # 初始化一次二维数组。
 func initialize_2d_array(rows: int, columns: int, default_value):
@@ -103,6 +104,7 @@ func _reload_array():
 func color_int_to_float(r: int, g: int, b: int) -> Color:
 	return Color(float(r) / 255, float(g) / 255, float(b) / 255)
 			
+# 初始化场景
 func _reload_scene():
 	for i in Global.height:
 		for j in Global.width:
@@ -115,28 +117,6 @@ func _reload_scene():
 			label.border_color = color_int_to_float(10, 10, 10)
 			scene_label[i][j].add_theme_stylebox_override("normal", label)
 			scene_label[i][j].add_theme_font_size_override("font_size", 29)
-			scene_label[i][j].text = str(chess[i][j]) if chess[i][j] > 0 else "" if chess[i][j] == 0 else "雷"
-			match chess[i][j]:
-				-1:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(30, 30, 120))
-				1:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 128, 255))
-				2:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 128, 0))
-				3:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(192, 0, 0))
-				4:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 0, 96))
-				5:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 0, 96))
-				6:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 96, 96))
-				7:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 0, 0))
-				8:
-					scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(160, 160, 160))
-				_:
-					pass
 			scene_label[i][j].horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			scene_label[i][j].vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			scene_label[i][j].size.x = 40
@@ -179,14 +159,19 @@ func _reload_scene():
 			scene_button[i][j].connect("gui_input", Callable(self, "_on_any_button_gui_input").bind(i, j))
 			$MineScenePanel.add_child(scene_button[i][j])
 			
+# 点击按钮
 func _on_any_button_gui_input(event, i: int, j: int):
-	if event is InputEventMouseButton and event.pressed:
+	# 首先判断一次是否已经判断了输赢
+	if not is_lock:
+		if event is InputEventMouseButton and event.pressed:
 		# 左键，执行on_any_button_pressed
-		if event.button_index == 1:
-			_on_any_button_step(i, j)
-		# 右键，为按钮标旗子~
-		elif event.button_index == 2:
-			_on_any_button_flag(i, j)
+			if event.button_index == 1:
+				_on_any_button_step(i, j)
+			# 右键，为按钮标旗子~
+			elif event.button_index == 2:
+				_on_any_button_flag(i, j)
+
+# 标记旗子
 func _on_any_button_flag(i: int, j: int):
 	if flag > 0:
 		if chess_lock[i][j]:
@@ -203,18 +188,54 @@ func _on_any_button_flag(i: int, j: int):
 			flag += 1
 			chess_lock[i][j] = not chess_lock[i][j]
 			$LabelFlag.text = "剩余旗子：" + str(flag)
+			
+# 显示数字~对照着chess的值直接赋值
+func show_number(i: int, j: int):
+	scene_label[i][j].text = str(chess[i][j]) if chess[i][j] > 0 else "" if chess[i][j] == 0 else "雷"
+	match chess[i][j]:
+		-1:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(30, 30, 120))
+		1:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 128, 255))
+		2:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 128, 0))
+		3:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(192, 0, 0))
+		4:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 0, 96))
+		5:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 0, 96))
+		6:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 96, 96))
+		7:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(0, 0, 0))
+		8:
+			scene_label[i][j].add_theme_color_override("font_color", color_int_to_float(100, 100, 100))
+		_:
+			pass
+
+# 任意一个按钮点击
 func _on_any_button_step(i: int, j: int):
-	if not is_lock and chess_lock[i][j]:
+	# 当点击第一个按钮时，埋雷并且初始化chess，为is_start赋值为true。
+	if not is_start:
+		is_start = true
+		# 埋雷
+		_rand_mine(i, j)
+		# 将chess赋值
+		_reload_array()
+	if chess_lock[i][j]:
 		if scene_button[i][j] != null:
 			remove_child(scene_button[i][j])
 			scene_button[i][j].queue_free()
 			scene_button[i][j] = null;
+			show_number(i, j)
 			if chess[i][j] == -1:
 				is_lock = true
 				$LabelWin.text = "你输了~"
 				for k in range(Global.height):
 					for l in range(Global.width):
 						if scene_button[k][l] != null and chess[k][l] == -1:
+							show_number(k, l)
 							remove_child(scene_button[k][l])
 							scene_button[k][l].queue_free()
 							scene_button[k][l] = null;
@@ -233,6 +254,7 @@ func _on_any_button_step(i: int, j: int):
 			if mine >= Global.width * Global.height - Global.mine:
 				is_lock = true
 				$LabelWin.text = "你赢了~"
+			# 如果走到空格，则递归调用八次本函数以翻开周围8个格子。
 			if chess[i][j] == 0:
 				if i > 0 and j > 0:
 					_on_any_button_step(i - 1, j - 1)

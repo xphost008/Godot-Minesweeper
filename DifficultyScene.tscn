@@ -6,68 +6,76 @@
 script = ExtResource("1_0qrl8")
 
 [node name="DifficultyHeightTextEdit" type="TextEdit" parent="."]
-offset_left = 465.0
-offset_top = 99.0
-offset_right = 825.0
-offset_bottom = 168.0
+offset_left = 304.0
+offset_top = 101.0
+offset_right = 664.0
+offset_bottom = 170.0
 theme_override_font_sizes/font_size = 40
 placeholder_text = "范围：（8~20）"
 
 [node name="DifficultyHeightLabel" type="Label" parent="."]
-offset_left = 252.0
-offset_top = 101.0
-offset_right = 452.0
-offset_bottom = 163.0
+offset_left = 79.0
+offset_top = 103.0
+offset_right = 279.0
+offset_bottom = 165.0
 theme_override_font_sizes/font_size = 40
 text = "场景高度："
 
 [node name="DifficultyWidthTextEdit" type="TextEdit" parent="."]
-offset_left = 465.0
-offset_top = 195.0
-offset_right = 826.0
-offset_bottom = 264.0
+offset_left = 305.0
+offset_top = 202.0
+offset_right = 666.0
+offset_bottom = 271.0
 theme_override_font_sizes/font_size = 40
 placeholder_text = "范围：（8~20）"
 
 [node name="DifficultyWidthLabel" type="Label" parent="."]
-offset_left = 249.0
-offset_top = 203.0
-offset_right = 449.0
-offset_bottom = 260.0
+offset_left = 78.0
+offset_top = 208.0
+offset_right = 278.0
+offset_bottom = 265.0
 theme_override_font_sizes/font_size = 40
 text = "场景宽度："
 
 [node name="DifficultyMineTextEdit" type="TextEdit" parent="."]
-offset_left = 465.0
-offset_top = 291.0
-offset_right = 884.0
-offset_bottom = 365.0
+offset_left = 304.0
+offset_top = 297.0
+offset_right = 692.0
+offset_bottom = 371.0
 theme_override_font_sizes/font_size = 40
-placeholder_text = "范围：（10~w*h-32）"
+placeholder_text = "范围:（10~w*h-32）"
 
 [node name="DifficultyMineLabel" type="Label" parent="."]
-offset_left = 250.0
-offset_top = 302.0
-offset_right = 450.0
-offset_bottom = 357.0
+offset_left = 82.0
+offset_top = 307.0
+offset_right = 282.0
+offset_bottom = 362.0
 theme_override_font_sizes/font_size = 40
 text = "场景雷数："
 
 [node name="DifficultySecondLabel" type="Label" parent="."]
-offset_left = 249.0
-offset_top = 403.0
-offset_right = 449.0
-offset_bottom = 468.0
+offset_left = 80.0
+offset_top = 406.0
+offset_right = 280.0
+offset_bottom = 471.0
 theme_override_font_sizes/font_size = 40
 text = "最大秒数："
 
 [node name="DifficultySecondTextEdit" type="TextEdit" parent="."]
-offset_left = 464.0
-offset_top = 393.0
-offset_right = 820.0
-offset_bottom = 468.0
+offset_left = 304.0
+offset_top = 398.0
+offset_right = 666.0
+offset_bottom = 473.0
 theme_override_font_sizes/font_size = 40
 placeholder_text = "范围：（60~600）"
+
+[node name="PresetsLabel" type="Label" parent="."]
+offset_left = 878.0
+offset_top = 97.0
+offset_right = 998.0
+offset_bottom = 152.0
+theme_override_font_sizes/font_size = 40
+text = "预设："
 
 [node name="StartButton" type="Button" parent="."]
 offset_left = 260.0
@@ -85,5 +93,32 @@ offset_bottom = 750.0
 theme_override_font_sizes/font_size = 40
 text = "返回主菜单"
 
+[node name="EasyButton" type="Button" parent="."]
+offset_left = 824.0
+offset_top = 169.0
+offset_right = 1016.0
+offset_bottom = 243.0
+theme_override_font_sizes/font_size = 40
+text = "简单"
+
+[node name="NormalButton" type="Button" parent="."]
+offset_left = 826.0
+offset_top = 266.0
+offset_right = 1018.0
+offset_bottom = 339.0
+theme_override_font_sizes/font_size = 40
+text = "普通"
+
+[node name="HardButton" type="Button" parent="."]
+offset_left = 826.0
+offset_top = 360.0
+offset_right = 1021.0
+offset_bottom = 431.0
+theme_override_font_sizes/font_size = 40
+text = "困难"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="button_down" from="EasyButton" to="." method="_on_easy_button_button_down"]
+[connection signal="button_down" from="NormalButton" to="." method="_on_normal_button_button_down"]
+[connection signal="button_down" from="HardButton" to="." method="_on_hard_button_button_down"]
