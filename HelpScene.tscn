@@ -23,25 +23,27 @@ theme_override_font_sizes/font_size = 100
 text = "帮助文档"
 
 [node name="HelpContent" type="Label" parent="."]
-offset_left = 101.0
-offset_top = 137.0
-offset_right = 1145.0
-offset_bottom = 595.0
-theme_override_font_sizes/font_size = 40
+offset_left = 52.0
+offset_top = 136.0
+offset_right = 1554.0
+offset_bottom = 813.0
+theme_override_font_sizes/font_size = 32
 text = "扫雷基本规则：
-扫出空白则代表该处周围8格均没有雷。
-扫出数字则代表周围8格之中有多少格雷。
-踩中了雷则失败~超时也失败。时间默认值5分钟（300秒）
-刚开局的时候，会有场景长度、宽度、雷数的选择~
-宽度默认值：8，高度默认值：8，雷数默认值：10
-如果雷数不在（10~长度*宽度-32）区间，
-则默认会按照输入的最大最小设置成这个值~"
+扫出空白则代表该处周围8格均没有雷。扫出数字则代表周围8格之中有多少格雷。
+踩中了雷则失败~超时也失败。刚开局的时候，会有场景长度、宽度、雷数、时间的选择~
+如果雷数不在（10~长度*宽度-32）区间，则默认会按照长宽设置雷数。
+最高记录分别指的是在游戏中的记录最高值。自定义难度不会记录成绩。只有预设会记录成绩。
+并且如果秒数更少但是分数更低的话，则不会记录该成绩。
+难度选择界面会有种子选取，你可以选择当前需要生成的种子。限1~4294967295。
+如果不输入则随机。如果输入的种子为0，则也认为是随机。除0以外任何正整数int范围数字都算种子。
+种子为固定开局，如果输入了种子，或者在游戏界面选择【以当前种子重启】，则默认不记录该成绩。
+现在宽度限制为30、高度限制为25啦~同时简单、普通、困难的预设也变啦~"
 
 [node name="HelpReturn" type="Button" parent="."]
-offset_left = 442.0
-offset_top = 639.0
-offset_right = 814.0
-offset_bottom = 779.0
+offset_left = 615.0
+offset_top = 836.0
+offset_right = 987.0
+offset_bottom = 976.0
 theme_override_fonts/font = SubResource("SystemFont_wb7bu")
 theme_override_font_sizes/font_size = 60
 text = "返回主菜单"

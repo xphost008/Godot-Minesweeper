@@ -11,49 +11,100 @@ bg_color = Color(0.70559, 0.70559, 0.705589, 1)
 script = ExtResource("1_dj1jk")
 
 [node name="ButtonReturn" type="Button" parent="."]
-offset_left = 36.0
-offset_top = 80.0
-offset_right = 311.0
-offset_bottom = 152.0
+offset_left = 39.0
+offset_top = 189.0
+offset_right = 323.0
+offset_bottom = 261.0
 theme_override_font_sizes/font_size = 40
 text = "返回主菜单"
 
 [node name="LabelScore" type="Label" parent="."]
-offset_left = 22.0
-offset_top = 188.0
-offset_right = 217.0
-offset_bottom = 243.0
+offset_left = 24.0
+offset_top = 279.0
+offset_right = 307.0
+offset_bottom = 334.0
 theme_override_fonts/font = SubResource("SystemFont_y8avb")
 theme_override_font_sizes/font_size = 40
-text = "分数：0"
+text = "当前分数：0"
 
 [node name="LabelSecond" type="Label" parent="."]
-offset_left = 26.0
-offset_top = 264.0
-offset_right = 294.0
-offset_bottom = 319.0
+offset_left = 21.0
+offset_top = 343.0
+offset_right = 301.0
+offset_bottom = 398.0
 theme_override_font_sizes/font_size = 40
 text = "剩余秒数：300"
 
 [node name="LabelWin" type="Label" parent="."]
-offset_left = 20.0
-offset_top = 612.0
-offset_right = 378.0
-offset_bottom = 749.0
+offset_left = 19.0
+offset_top = 831.0
+offset_right = 377.0
+offset_bottom = 968.0
 theme_override_font_sizes/font_size = 100
 
 [node name="MineScenePanel" type="Panel" parent="."]
 offset_left = 400.0
-offset_right = 1200.0
-offset_bottom = 800.0
+offset_right = 1600.0
+offset_bottom = 1000.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cfjui")
 
 [node name="LabelFlag" type="Label" parent="."]
-offset_left = 24.0
-offset_top = 349.0
-offset_right = 287.0
-offset_bottom = 404.0
+offset_left = 21.0
+offset_top = 414.0
+offset_right = 308.0
+offset_bottom = 469.0
 theme_override_font_sizes/font_size = 40
 text = "剩余旗子：0"
 
+[node name="RetryButton" type="Button" parent="."]
+offset_left = 39.0
+offset_top = 12.0
+offset_right = 312.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 40
+text = "以当前难度重启"
+
+[node name="DifLabel" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 610.0
+offset_right = 347.0
+offset_bottom = 665.0
+theme_override_font_sizes/font_size = 40
+text = "当前难度："
+
+[node name="SecondRecordLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 762.0
+offset_right = 354.0
+offset_bottom = 817.0
+theme_override_font_sizes/font_size = 40
+text = "秒数记录："
+
+[node name="ScoreRecordLabel" type="Label" parent="."]
+offset_left = 19.0
+offset_top = 683.0
+offset_right = 352.0
+offset_bottom = 738.0
+theme_override_font_sizes/font_size = 40
+text = "分数记录："
+
+[node name="CurrentSeedLabel" type="Label" parent="."]
+offset_left = 21.0
+offset_top = 483.0
+offset_right = 363.0
+offset_bottom = 593.0
+theme_override_font_sizes/font_size = 40
+text = "当前种子：
+0"
+
+[node name="RetryBySeedButton" type="Button" parent="."]
+offset_left = 36.0
+offset_top = 99.0
+offset_right = 324.0
+offset_bottom = 174.0
+theme_override_font_sizes/font_size = 40
+text = "以当前种子重启"
+
 [connection signal="pressed" from="ButtonReturn" to="." method="_on_button_return_pressed"]
+[connection signal="pressed" from="RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="RetryBySeedButton" to="." method="_on_retry_by_seed_button_pressed"]

@@ -18,31 +18,37 @@ font_weight = 700
 script = ExtResource("1_vegdb")
 
 [node name="MainTitle" type="Label" parent="."]
-offset_left = 286.0
-offset_top = 46.0
-offset_right = 926.0
-offset_bottom = 207.0
+offset_left = 497.0
+offset_top = 51.0
+offset_right = 1137.0
+offset_bottom = 212.0
 theme_override_fonts/font = SubResource("SystemFont_apond")
 theme_override_font_sizes/font_size = 160
 text = "扫雷游戏"
 
 [node name="ButtonStart" type="Button" parent="."]
-offset_left = 457.0
-offset_top = 472.0
-offset_right = 820.0
-offset_bottom = 590.0
+offset_left = 634.0
+offset_top = 682.0
+offset_right = 997.0
+offset_bottom = 800.0
 theme_override_fonts/font = SubResource("SystemFont_ycfwn")
 theme_override_font_sizes/font_size = 60
 text = "开始游戏"
 
 [node name="ButtonHelp" type="Button" parent="."]
-offset_left = 457.0
-offset_top = 616.0
-offset_right = 817.0
-offset_bottom = 729.0
+offset_left = 639.0
+offset_top = 845.0
+offset_right = 1004.0
+offset_bottom = 958.0
 theme_override_fonts/font = SubResource("SystemFont_rpody")
 theme_override_font_sizes/font_size = 60
 text = "帮助"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 117.0
+offset_top = 265.0
+offset_right = 1062.0
+offset_bottom = 353.0
 
 [connection signal="pressed" from="ButtonStart" to="." method="_on_button_start_pressed"]
 [connection signal="pressed" from="ButtonHelp" to="." method="_on_button_help_pressed"]
