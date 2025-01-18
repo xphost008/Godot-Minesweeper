@@ -6,7 +6,7 @@
 
 尽情观看吧~
 
-二进制下载：[蓝奏云](https://wwdy.lanzoub.com/iIzWY2kkjivg)，密码：hce3
+二进制下载：[蓝奏云](https://wwdy.lanzoub.com/ikZiE2lbhoub)，密码：6amm
 
 更新日志：
 
