@@ -2,10 +2,11 @@ extends Node2D
 
 # 值~每个雷代表-1，周围的数字代表周围雷数量。0~8
 var chess
-var chess_lock
-var scene_button
-var scene_label
-var time
+var chess_lock = null
+var chess_qmark = null
+var scene_button = null
+var scene_label = null
+var time = 0
 var is_lock = false
 var mine = 0
 var flag = 0
@@ -217,28 +218,47 @@ func _rand_mine(sd: int) -> int:
 	
 # 初始化一次二维数组。
 func initialize_2d_array(rows: int, columns: int):
+	if scene_button != null or scene_label != null:
+		for i in range(rows):
+			if scene_button[i] != null or scene_label != null:
+				for j in range(columns):
+					if scene_button[i][j] != null:
+						# 移除覆盖在上面的按钮
+						remove_child(scene_button[i][j])
+						scene_button[i][j].queue_free()
+						scene_button[i][j] = null;
+					if scene_label[i][j] != null:
+						# 移除覆盖在上面的按钮
+						remove_child(scene_label[i][j])
+						scene_label[i][j].queue_free()
+						scene_label[i][j] = null;
 	chess = []
 	chess_lock = []
 	scene_button = []
 	scene_label = []
+	chess_qmark = []
 	chess.resize(rows)
 	chess_lock.resize(rows)
 	scene_button.resize(rows)
 	scene_label.resize(rows)
+	chess_qmark.resize(rows)
 	for i in range(rows):
 		chess[i] = []
 		chess_lock[i] = []
 		scene_button[i] = []
 		scene_label[i] = []
+		chess_qmark[i] = []
 		chess[i].resize(columns)
 		chess_lock[i].resize(columns)
 		scene_button[i].resize(columns)
 		scene_label[i].resize(columns)
+		chess_qmark[i].resize(columns)
 		for j in range(columns):
 			chess[i][j] = 0
 			chess_lock[i][j] = true
 			scene_button[i][j] = null
 			scene_label[i][j] = null
+			chess_qmark[i][j] = false
 
 func _reload_array():
 	for i in range(Global.height):
@@ -407,6 +427,10 @@ func _on_any_button_gui_input(event: InputEvent, i: int, j: int):
 func _on_any_button_flag(i: int, j: int):
 	if scene_button[i][j] != null:
 		if flag > 0:
+			if chess_qmark[i][j]:
+				scene_button[i][j].text = ""
+				chess_qmark[i][j] = not chess_qmark[i][j]
+				return
 			if chess_lock[i][j]:
 				scene_button[i][j].text = "🚩"
 				flag -= 1
@@ -415,12 +439,22 @@ func _on_any_button_flag(i: int, j: int):
 				flag += 1
 			chess_lock[i][j] = not chess_lock[i][j]
 			$LabelFlag.text = "剩余旗子：" + str(flag)
+			if chess_lock[i][j] and not chess_qmark[i][j]:
+				scene_button[i][j].text = "❔"
+				chess_qmark[i][j] = not chess_qmark[i][j]
 		else:
+			if chess_qmark[i][j]:
+				scene_button[i][j].text = ""
+				chess_qmark[i][j] = not chess_qmark[i][j]
+				return
 			if not chess_lock[i][j]:
 				scene_button[i][j].text = ""
 				flag += 1
 				chess_lock[i][j] = not chess_lock[i][j]
 				$LabelFlag.text = "剩余旗子：" + str(flag)
+			if chess_lock[i][j] and not chess_qmark[i][j]:
+				scene_button[i][j].text = "❔"
+				chess_qmark[i][j] = not chess_qmark[i][j]
 			
 # 显示数字~对照着chess的值直接赋值
 func show_number(i: int, j: int):
